@@ -1,0 +1,42 @@
+name: rosatom-case
+channels:
+  - conda-forge
+  - bioconda
+  - pytorch
+dependencies:
+  # Package creation and environment management
+  - conda-build
+  # Automation control (command line interface, workflow and multi-process management)
+  - python-dotenv
+  - click
+  - snakemake-minimal
+  - joblib
+  # Workspace
+  - notebook
+  - jupyterlab
+  # Visualization
+  - plotly
+  - matplotlib
+  # Data manipulation
+  - numpy
+  - pandas
+  # Functional style tools
+  - more-itertools
+  - toolz
+  # Machine learning
+  - scikit-learn
+  - scikit-image
+  # code checking and formatting
+  - pylint
+  - black
+  - flake8
+  - mypy
+  # Python base
+  - python=3.8
+  # Deep learning package
+  - pytorch
+  - torchvision
+  - torchaudio
+  - cudatoolkit=10.2
+  - pip
+  - pip:
