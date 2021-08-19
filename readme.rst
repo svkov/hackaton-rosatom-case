@@ -6,11 +6,17 @@ rosatom-case
 
 Getting Started:
 -------------------------------------------------------------------------------
-- Create virtual environment for development:
+- Create virtual environment for development if you have GPU:
 
 .. code::
 
-    $ conda env create -f devenv.yaml
+    $ conda env create -f devenv-gpu.yaml
+
+- Or CPU otherwise:
+
+.. code::
+
+    $ conda env create -f devenv-cpu.yaml
 
 - Activate virtual environment:
 
