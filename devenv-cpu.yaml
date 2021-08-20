@@ -44,3 +44,4 @@ dependencies:
     - fastapi[all]
     - SQLAlchemy
     - python-multipart
+    - aiofiles
