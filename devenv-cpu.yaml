@@ -31,6 +31,7 @@ dependencies:
   - black
   - flake8
   - mypy
+  - autopep8
   # Python base
   - python=3.8
   # Deep learning package
@@ -40,3 +41,5 @@ dependencies:
   - cpuonly
   - pip
   - pip:
+    - fastapi[all]
+    - SQLAlchemy

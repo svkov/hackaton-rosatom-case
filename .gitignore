@@ -9,3 +9,7 @@
 
 # Snakemake
 .snakemake/
+
+# Database
+*.db
+*.sqlite3
