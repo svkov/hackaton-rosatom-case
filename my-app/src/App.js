@@ -1,8 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import Example from './Burger'
+import Example from './Burger';
+// import FileUploader from './FileUploader';
+import FileUploadButton from './FileUploader';
 import react from 'react';
-import axios from 'axios'
+import axios from 'axios';
+import { AwesomeButton } from "react-awesome-button";
+import "react-awesome-button/dist/styles.css";
+
 
 axios.defaults.baseURL = 'http://127.0.0.1:8000/';
 
@@ -18,6 +23,7 @@ class App extends react.Component {
   }; 
    
   onFileUpload = () => { 
+    console.log(this.state)
     const formData = new FormData(); 
     formData.append( 
       "file", 
@@ -27,42 +33,17 @@ class App extends react.Component {
     axios.post("api/uploadfile", formData); 
   }; 
 
-  fileData = () => { 
-    if (this.state.selectedFile) { 
-        
-      return ( 
-        <div> 
-          <h2>File Details:</h2> 
-          <p>File Name: {this.state.selectedFile.name}</p> 
-          <p>File Type: {this.state.selectedFile.type}</p> 
-          <p> 
-            Last Modified:{" "} 
-            {this.state.selectedFile.lastModifiedDate.toDateString()} 
-          </p> 
-        </div> 
-      ); 
-    } else { 
-      return ( 
-        <div> 
-          <br /> 
-          <h4>Choose before Pressing the Upload button</h4> 
-        </div> 
-      ); 
-    } 
-  }; 
-
   render() {
     return (
       <div className="App">
         <Example pageWrapId={"page-wrap"} outerContainerId={ "App" }/>
         <div id="page-wrap">
           <div id="upload-file">
-          <input type="file" onChange={this.onFileChange} /> 
-                <button onClick={this.onFileUpload}> 
-                  Upload! 
-                </button> 
+            <FileUploadButton onChange={this.onFileChange} />
+              <AwesomeButton onPress={this.onFileUpload} type="primary">
+                Загрузить
+              </AwesomeButton>
           </div>
-          {this.fileData()} 
         </div>
       </div>
     );
