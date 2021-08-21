@@ -13,9 +13,10 @@ class FileUploadButton extends Component {
             onChange={this.props.onChange}
             type="file"
             style={{ display: "none" }}
+            onUp
             // multiple={false}
           />
-          <AwesomeButton onPress={() => this.refs.fileInput.click()}>Upload File</AwesomeButton>
+          <AwesomeButton onPress={() => this.refs.fileInput.click()}>Загрузить</AwesomeButton>
         </Fragment>
       );
     }

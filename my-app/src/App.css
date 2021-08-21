@@ -38,9 +38,9 @@
 }
 
 #upload-file {
-  position: absolute;
+  /* position: absolute;
   top: 40%;
-  left: 40%;
+  left: 40%; */
 }
 
 #stenogram {}
@@ -96,9 +96,6 @@ ul {
   text-align: center;
 }
 
-#history-page {
-  margin-top: 10%;
-}
 
 
 .Title {
@@ -119,4 +116,54 @@ ul {
   display: flex;
   justify-content: center;
   align-items: baseline;
+}
+
+.Collapsible__trigger {
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+}
+
+.Collapsible__trigger.is-open img {
+  transform: rotate(90deg);
+}
+
+.Collapsible__trigger.is-close img {
+  transform: rotate(0deg);
+}
+
+.helper-1{
+  display: flex;
+  justify-content: space-around;
+}
+
+.helper-1-item{
+  margin-left: 10%;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.arrow{
+  /* transform: rotate(0deg); */
+  background-color: #1e88e5;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.colaps-header {
+  display: flex;
+  justify-content: center;
+}
+
+.history-list{
+  display: flex;
+  justify-content: space-around;
+}
+
+.rdn-drop, .rdn-selection {
+  position: unset !important;
 }

@@ -54,3 +54,7 @@ def model_call():
 async def get_predict(id: int):
     result = model_call()
     return {'text': result}
+
+# @app.get('/api/word')
+# async def get_word():
+#     pass

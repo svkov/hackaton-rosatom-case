@@ -4,6 +4,8 @@ import { AwesomeButton } from "react-awesome-button";
 import Collapsible from "react-collapsible";
 import { Dropdown } from "react-dropdown-now";
 import "react-dropdown-now/style.css";
+import Arrow1 from "./Arrow1.svg";
+import "react-dropdown/style.css";
 
 const headers = {
   "Access-Control-Allow-Origin": "*",
@@ -31,6 +33,23 @@ class ListItem extends Component {
   }
 }
 
+class ExportComponent extends Component {
+  render() {
+    return (
+      <div className="buttons">
+        <div class="submit-buttons">
+          <AwesomeButton className="submit-buttons">Применить</AwesomeButton>
+        </div>
+        <div class="submit-buttons">
+          <AwesomeButton className="submit-buttons">Скачать</AwesomeButton>
+        </div>
+        <div class="submit-buttons">
+          <Dropdown options={["PDF", "Word"]} value={"Word"} />
+        </div>
+      </div>
+    );
+  }
+}
 class History extends Component {
   state = {
     text: null,
@@ -50,40 +69,56 @@ class History extends Component {
     this.callBack();
   };
 
+  //   onCollapsibleOpen =
+
   render() {
     console.log(this.state.text);
+    const stenogram_trigger = (
+      <div className="colaps-header">
+        <img src={Arrow1} className="arrow"></img>
+        <div>Стенограмма</div>
+      </div>
+    );
+
+    const protocol_trigger = (
+      <div className="colaps-header">
+        <img src={Arrow1} className="arrow"></img>
+        <div>Протокол</div>
+      </div>
+    );
+
+    const history = (
+      <div className="colaps-header">
+        <img src={Arrow1} className="arrow"></img>
+        <div>История изменения</div>
+      </div>
+    );
     return (
       <div>
         <div id="history-page">
           <hr />
           <div className="bar" id="stenogram">
-            <Collapsible trigger="Стенограмма">
+            <Collapsible trigger={stenogram_trigger} open={true}>
               <div className="collapsible-content">
                 <div class="dialog">
+                  <br />
+                  Проверьте правильность стенограммы
+                  <ul className="helper-1">
+                    <li className="helper-1-item">Автор</li>
+                    <li className="helper-1-item">Фраза</li>
+                  </ul>
                   <ListItem user_id={0} text="Коллеги, добрый день." />
                   <ListItem user_id={1} text="Добрый день, коллеги" />
                   <ListItem user_id={2} text="Приветствую" />
                   <ListItem user_id={0} text="Сегодняшняя повестка дня..." />
                 </div>
-
-                <div className="buttons">
-                  <div class="submit-buttons">
-                    <AwesomeButton className="submit-buttons">
-                      Применить
-                    </AwesomeButton>
-                  </div>
-                  <div class="submit-buttons">
-                    <AwesomeButton className="submit-buttons">
-                      Скачать
-                    </AwesomeButton>
-                  </div>
-                </div>
+                <ExportComponent />
               </div>
             </Collapsible>
           </div>
           <hr />
           <div className="bar" id="protocol">
-            <Collapsible trigger="Протокол">
+            <Collapsible trigger={protocol_trigger} open={true}>
               <p>
                 <b>Присутствовали</b>
               </p>
@@ -99,18 +134,33 @@ class History extends Component {
                 className="protocol-text"
                 value={this.state.text}
               ></textarea>
-              <div className="buttons">
-                <div class="submit-buttons">
-                  <AwesomeButton className="submit-buttons">
-                    Применить
-                  </AwesomeButton>
-                </div>
-                <div class="submit-buttons">
-                  <AwesomeButton className="submit-buttons">
-                    Скачать
-                  </AwesomeButton>
-                </div>
-              </div>
+              <ExportComponent/>
+            </Collapsible>
+          </div>
+          <hr />
+          <div className="bar">
+            <Collapsible trigger={history}>
+              <ul className="history-list">
+                <li>Автор</li>
+                <li>Изменение</li>
+                <li>Время</li>
+              </ul>
+              <hr />
+              <ul className="history-list">
+                <li>{users[0]}</li>
+                <li>Изменена стенограмма</li>
+                <li>13:01:12</li>
+              </ul>
+              <ul className="history-list">
+                <li>{users[1]}</li>
+                <li>Изменен протокол</li>
+                <li>13:03:35</li>
+              </ul>
+              <ul className="history-list">
+                <li>{users[2]}</li>
+                <li>Изменена стенограмма</li>
+                <li>13:05:16</li>
+              </ul>
             </Collapsible>
           </div>
           <hr />
