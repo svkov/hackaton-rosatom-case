@@ -1,15 +1,59 @@
 import { Component } from "react";
 import { AwesomeButton } from "react-awesome-button";
 import FileUploadButton from './FileUploader';
+import axios from 'axios';
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+axios.defaults.baseURL = 'http://127.0.0.1:8000/';
 
+const headers = {
+    "Access-Control-Allow-Origin": "*",
+    'content-type': 'application/json',
+  };
+
+function Button(props) {
+    let history = useHistory();
+
+    function click() {
+        props.onClick(history);
+    }
+
+    return (
+        <AwesomeButton onPress={click} type="primary">
+            Загрузить
+        </AwesomeButton>
+    )
+}
 class Home extends Component {
+    state = {
+        selectedFile: null,
+        file_id: 0
+    }
+
+    onFileChange = event => { 
+        this.setState({ selectedFile: event.target.files[0] }); 
+      }; 
+       
+    onFileUpload = (history) => { 
+        console.log(this.state)
+        const formData = new FormData(); 
+        formData.append( 
+          "file", 
+          this.state.selectedFile, 
+          this.state.selectedFile.name 
+        ); 
+        var self = this;
+        axios.post("api/uploadfile", formData, {headers: headers}).then(function (response) {
+          const file_id = response.data.file_id;
+          self.setState({file_id: file_id});
+          history.push(`/history/${file_id}`)
+        }); 
+      }; 
+
     render() {
         return (
             <div id="upload-file">
             <FileUploadButton onChange={this.onFileChange} />
-              <AwesomeButton onPress={this.onFileUpload} type="primary">
-                Загрузить
-              </AwesomeButton>
+              <Button onClick={this.onFileUpload} file_id={this.state.file_id}/>
             </div>
         );
     }

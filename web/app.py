@@ -47,7 +47,7 @@ async def upload_file(file: UploadFile = File(...), db: Session = Depends(get_db
 
 
 def model_call():
-    return 'ГОТОВЫЙ ПРОТОКОЛ'
+    return 'Обсудили, решили, сделали.....'
 
 
 @app.get('/api/predict/{id}')
