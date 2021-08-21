@@ -1,6 +1,7 @@
 import React from "react";
 import './Burger.css';
 import { slide as Menu } from 'react-burger-menu'
+import { Link, BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 class Example extends React.Component {
   showSettings (event) {
@@ -11,8 +12,15 @@ class Example extends React.Component {
     // NOTE: You also need to provide styles, see https://github.com/negomi/react-burger-menu#styling
     return (
       <Menu>
-        <a id="upload" className="menu-item" href="/">Загрузить</a>
-        <a id="history" className="menu-item" href="/about">История</a>
+          <ul>
+            <li>
+              <Link to="/">Загрузить</Link>
+            </li>
+            <li>
+              <Link to="/history">История</Link>
+            </li>
+          </ul>
+          
       </Menu>
     );
   }

@@ -1,13 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
-import Example from './Burger';
-import FileUploadButton from './FileUploader';
-import MainScreen from './MainScreen';
-import react from 'react';
-import axios from 'axios';
-import { AwesomeButton } from "react-awesome-button";
-import "react-awesome-button/dist/styles.css";
 
+import react from 'react';
+import Example from './Burger';
+import axios from 'axios';
+import History from './History';
+import NotFound from './NotFound'
+import Home from './Home'
+
+import "react-awesome-button/dist/styles.css";
+import {Switch, Route, BrowserRouter as Router, Link} from 'react-router-dom';
 
 axios.defaults.baseURL = 'http://127.0.0.1:8000/';
 
@@ -34,30 +36,31 @@ class App extends react.Component {
       this.state.selectedFile.name 
     ); 
     axios.post("api/uploadfile", formData, {headers: headers}).then(function (response) {
-      // handle success
-      console.log(response);
+      const file_id = response.data.file_id;
+      const new_url = `api/predict/${file_id}`;
+      axios.get(new_url, {headers: headers}).then(function(response) {
+        console.log(response);
+      })
     }); 
   }; 
 
   render() {
-    const content = (
-    <div id="upload-file">
-    <FileUploadButton onChange={this.onFileChange} />
-      <AwesomeButton onPress={this.onFileUpload} type="primary">
-        Загрузить
-      </AwesomeButton>
-    </div>
-    ) 
-    
     return (
       <div className="App">
-        <Example pageWrapId={"page-wrap"} outerContainerId={ "App" }/>
-        <div id="page-wrap">
-          {content}
-        </div>
+        <Router>
+          <Example pageWrapId={"page-wrap"} outerContainerId={ "App" }/>
+          <div id="page-wrap">
+            <Switch>
+                <Route path="/history" component={History}/>
+                <Route exact path="/" component={Home} />
+                <Route component={NotFound} />
+            </Switch>
+          </div>
+        </Router>
       </div>
     );
   }
 }
+
 
 export default App;
