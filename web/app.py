@@ -66,7 +66,7 @@ async def get_predict(id: int, db: Session = Depends(get_db)):
 @app.get('/api/word')
 async def get_word():
     media_type = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' # noqa
-    return FileResponse('data/word.docx',
+    return FileResponse('web/word.docx',
                         media_type=media_type,
                         filename='file.docx',
                         headers={
@@ -76,7 +76,7 @@ async def get_word():
 
 @app.get('/api/pdf')
 async def get_pdf():
-    return FileResponse('data/pdf.pdf',
+    return FileResponse('web/pdf.pdf',
                         media_type='application/pdf',
                         filename='file.docx',
                         headers={
