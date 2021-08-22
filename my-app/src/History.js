@@ -184,27 +184,29 @@ class History extends Component {
           <hr className="nomargin" />
           <div className="bar">
             <Collapsible trigger={history}>
-              <ul className="history-list">
-                <li>Автор</li>
-                <li>Изменение</li>
-                <li>Время</li>
-              </ul>
-              <hr className="nomargin" />
-              <ul className="history-list">
-                <li>{users[0]}</li>
-                <li>Изменена стенограмма</li>
-                <li>13:01:12</li>
-              </ul>
-              <ul className="history-list">
-                <li>{users[1]}</li>
-                <li>Изменен протокол</li>
-                <li>13:03:35</li>
-              </ul>
-              <ul className="history-list">
-                <li>{users[2]}</li>
-                <li>Изменена стенограмма</li>
-                <li>13:05:16</li>
-              </ul>
+                <div className="history-wrapper">
+                <div className="column">
+                    <div className="header-t">Автор</div>
+                    <hr/>
+                    <div>{users[0]}</div>
+                    <div>{users[1]}</div>
+                    <div>{users[0]}</div>
+                </div>
+                <div className="column">
+                    <div className="header-t">Изменения</div>
+                    <hr/>
+                    <div>Изменена стенограмма</div>
+                    <div>Изменен протокол</div>
+                    <div>Стенограмма и протокол сгенерированы</div>
+                </div>
+                <div className="column">
+                    <div className="header-t">Время</div>
+                    <hr/>
+                    <div>13:01:12</div>
+                    <div>13:03:35</div>
+                    <div>13:05:16</div>
+                </div>
+                </div>
             </Collapsible>
           </div>
           <hr className="nomargin" />

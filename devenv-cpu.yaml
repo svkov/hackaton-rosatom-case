@@ -45,3 +45,7 @@ dependencies:
     - SQLAlchemy
     - python-multipart
     - aiofiles
+    - SpeechRecognition
+    - moviepy
+    - transformers
+    - pocketsphinx

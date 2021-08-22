@@ -14,13 +14,13 @@ class Example extends React.Component {
       <Menu>
           <ul>
             <li>
-              <Link to="/">Загрузить</Link>
+              <Link className="link" to="/">Загрузить</Link>
             </li>
             <li>
-              <Link to="/history">Протокол</Link>
+              <Link className="link" to="/history">Протокол</Link>
             </li>
             <li>
-              <Link to="/all">История</Link>
+              <Link className="link" to="/all">История</Link>
             </li>
           </ul>
           
