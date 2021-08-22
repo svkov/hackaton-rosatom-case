@@ -16,6 +16,7 @@ rosatom-case
 
 ``` ru.lm  ->  language-model.lm.bin ```
 
+- В файлах скачанных библиотек `speech_recognition\pocketsphinx-data\`  и `pocketsphinx\model\` создаём папку с именем `rus` и перемещаем туда ранее переименованные файлы (`acoustic-model`, `pronounciation-dictionary.dict`, `language-model.lm.bin`).
 
 - Создать виртуальное окружение:
 
@@ -26,8 +27,9 @@ rosatom-case
     ```$ conda activate rosatom-case```
 
 - Установить зависимости JS
+
     ``` cd my-app ```
-    
+
     ``` npm install```
 
 # Запуск
