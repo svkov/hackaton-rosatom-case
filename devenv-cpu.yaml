@@ -31,6 +31,7 @@ dependencies:
   - black
   - flake8
   - mypy
+  - autopep8
   # Python base
   - python=3.8
   # Deep learning package
@@ -38,5 +39,14 @@ dependencies:
   - torchvision
   - torchaudio
   - cpuonly
+  - swig
   - pip
   - pip:
+    - fastapi[all]
+    - SQLAlchemy
+    - python-multipart
+    - aiofiles
+    - SpeechRecognition
+    - moviepy
+    - transformers
+    - pocketsphinx
