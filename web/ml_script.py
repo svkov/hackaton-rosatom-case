@@ -1,5 +1,3 @@
-import subprocess
-import os
 import re
 
 import speech_recognition as sr

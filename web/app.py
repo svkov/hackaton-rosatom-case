@@ -1,3 +1,4 @@
+from web.ml_script import speech_to_text, summarizate, video_to_audio
 from fastapi import FastAPI, File, UploadFile, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm.session import Session
@@ -47,14 +48,18 @@ async def upload_file(file: UploadFile = File(...), db: Session = Depends(get_db
     return {'file_id': model_file.id}
 
 
-def model_call():
-    
-    return 'эта речь прежде всего хочу ли впоследствии на втором этапе проекта управляющий'
+def model_call(file_id, db):
+    path = db.query(File).filter_by(id=file_id).first().path
+    wav_path = 'data/file.wav'
+    video_to_audio(path, wav_path)
+    content = speech_to_text(wav_path)
+    return summarizate(content)
+    # return 'эта речь прежде всего хочу ли впоследствии на втором этапе проекта управляющий'
 
 
 @app.get('/api/predict/{id}')
-async def get_predict(id: int):
-    result = model_call()
+async def get_predict(id: int, db: Session = Depends(get_db)):
+    result = model_call(id, db)
     return {'text': result}
 
 
