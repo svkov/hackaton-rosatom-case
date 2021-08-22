@@ -17,7 +17,10 @@ class Example extends React.Component {
               <Link to="/">Загрузить</Link>
             </li>
             <li>
-              <Link to="/history">История</Link>
+              <Link to="/history">Протокол</Link>
+            </li>
+            <li>
+              <Link to="/all">История</Link>
             </li>
           </ul>
           

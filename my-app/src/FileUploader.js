@@ -16,7 +16,7 @@ class FileUploadButton extends Component {
             onUp
             // multiple={false}
           />
-          <AwesomeButton onPress={() => this.refs.fileInput.click()}>Загрузить</AwesomeButton>
+          <AwesomeButton className={this.props.className} onPress={() => this.refs.fileInput.click()}>Загрузить</AwesomeButton>
         </Fragment>
       );
     }

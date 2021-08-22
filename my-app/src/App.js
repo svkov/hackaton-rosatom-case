@@ -10,6 +10,7 @@ import Home from "./Home";
 
 import "react-awesome-button/dist/styles.css";
 import { Switch, Route, BrowserRouter as Router, Link } from "react-router-dom";
+import All from './All'
 
 class App extends react.Component {
   state = {
@@ -20,8 +21,7 @@ class App extends react.Component {
     return (
       <div className="App">
         <div className="Title">
-          <img src={logo} width="10%"/>
-          {/* <h1>РОСАТОМ</h1> */}
+          <img src={logo} width="10%" />
           <div className="Title-Subtitle"></div>
         </div>
         <Router>
@@ -31,6 +31,9 @@ class App extends react.Component {
               <Route exact path="/" component={Home} />
               <Route path="/history">
                 <History file_id={this.state.file_id} />{" "}
+              </Route>
+              <Route path="/all">
+                <All/>
               </Route>
               <Route component={NotFound} />
             </Switch>

@@ -18,7 +18,7 @@ function Button(props) {
   }
 
   return (
-    <AwesomeButton onPress={click} type="primary">
+    <AwesomeButton id={props.id} className={props.className} onPress={click} type="primary">
       Отправить
     </AwesomeButton>
   );
@@ -56,13 +56,15 @@ class Home extends Component {
   render() {
     return (
       <div id="upload-file">
-          Нажмите "Загрузить", чтобы выбрать файл, а затем нажмите "Отправить"
-          <br/>
-        <FileUploadButton onChange={this.onFileChange} />
-        <Button
-          onClick={this.onFileUpload}
-          file_id={this.state.file_id}
-        />
+        <h1>Загрузите запись совещания</h1>
+        Нажмите "Загрузить", чтобы выбрать файл, а затем нажмите "Отправить".
+        <br />
+        Поддерживаются только файлы формата mp4
+        <br />
+        <div>
+          <FileUploadButton className="buttons-home" onChange={this.onFileChange} />
+          <Button className="buttons-home" onClick={this.onFileUpload} file_id={this.state.file_id} />
+        </div>
       </div>
     );
   }

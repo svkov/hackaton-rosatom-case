@@ -44,47 +44,51 @@ class ExportComponent extends Component {
       axios
         .get("api/word", {
           responseType: "blob",
-          headers: {"Access-Control-Allow-Origin": "*"}
+          headers: { "Access-Control-Allow-Origin": "*" },
         })
         .then((response) => {
-            console.log(response)
+          console.log(response);
           saveAs(response.data, "Отчет.docx");
         });
     } else {
-        axios
+      axios
         .get("api/pdf", {
           responseType: "blob",
-          headers: {"Access-Control-Allow-Origin": "*"}
+          headers: { "Access-Control-Allow-Origin": "*" },
         })
         .then((response) => {
-            console.log(response)
+          console.log(response);
           saveAs(response.data, "Отчет.pdf");
         });
     }
-    
   };
   render() {
     return (
-      <div className="buttons">
-        <div class="submit-buttons">
-          <AwesomeButton className="submit-buttons">Применить</AwesomeButton>
+      <div>
+        <div className="buttons">
+          <div class="submit-buttons">
+            <AwesomeButton className="submit-buttons">Применить</AwesomeButton>
+          </div>
+          <div class="submit-buttons">
+            <AwesomeButton className="submit-buttons" onPress={this.download}>
+              Скачать
+            </AwesomeButton>
+          </div>
+          <div class="submit-buttons">
+            <Dropdown
+              options={["PDF", "Word"]}
+              value={this.state.format}
+              onChange={(value) =>
+                this.setState({
+                  format: { label: value.label, value: value.value },
+                })
+              }
+            />
+          </div>
         </div>
-        <div class="submit-buttons">
-          <AwesomeButton className="submit-buttons" onPress={this.download}>
-            Скачать
-          </AwesomeButton>
-        </div>
-        <div class="submit-buttons">
-          <Dropdown
-            options={["PDF", "Word"]}
-            value={this.state.format}
-            onChange={(value) =>
-              this.setState({
-                format: { label: value.label, value: value.value },
-              })
-            }
-          />
-        </div>
+        <p className="small-text">
+            Нажмите "Применить", чтобы сохранить изменения
+          </p>
       </div>
     );
   }
@@ -135,7 +139,7 @@ class History extends Component {
     return (
       <div>
         <div id="history-page">
-          <hr />
+          <hr className="nomargin" />
           <div className="bar" id="stenogram">
             <Collapsible trigger={stenogram_trigger} open={true}>
               <div className="collapsible-content">
@@ -155,9 +159,10 @@ class History extends Component {
               </div>
             </Collapsible>
           </div>
-          <hr />
+          <hr className="nomargin" />
           <div className="bar" id="protocol">
             <Collapsible trigger={protocol_trigger} open={true}>
+              Проверьте правильность протокола
               <p>
                 <b>Присутствовали</b>
               </p>
@@ -176,7 +181,7 @@ class History extends Component {
               <ExportComponent />
             </Collapsible>
           </div>
-          <hr />
+          <hr className="nomargin" />
           <div className="bar">
             <Collapsible trigger={history}>
               <ul className="history-list">
@@ -184,7 +189,7 @@ class History extends Component {
                 <li>Изменение</li>
                 <li>Время</li>
               </ul>
-              <hr />
+              <hr className="nomargin" />
               <ul className="history-list">
                 <li>{users[0]}</li>
                 <li>Изменена стенограмма</li>
@@ -202,7 +207,7 @@ class History extends Component {
               </ul>
             </Collapsible>
           </div>
-          <hr />
+          <hr className="nomargin" />
         </div>
       </div>
     );

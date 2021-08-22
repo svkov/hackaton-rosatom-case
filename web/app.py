@@ -59,8 +59,9 @@ async def get_predict(id: int):
 
 @app.get('/api/word')
 async def get_word():
+    media_type = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' # noqa
     return FileResponse('data/word.docx',
-                        media_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                        media_type=media_type,
                         filename='file.docx',
                         headers={
                             "Access-Control-Allow-Origin": "*",
