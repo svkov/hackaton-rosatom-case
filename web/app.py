@@ -1,9 +1,9 @@
 from fastapi import FastAPI, File, UploadFile, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm.session import Session
+from starlette.responses import FileResponse
 
 from web.db import SessionLocal, engine
-from pydantic import BaseModel
 import web.models as models
 import aiofiles
 
@@ -28,13 +28,14 @@ def get_db():
     finally:
         db.close()
 
+
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
 
 
 @app.post('/api/uploadfile')
-async def upload_file(file: UploadFile = File(...), db: Session = Depends(get_db)): # noqa
+async def upload_file(file: UploadFile = File(...), db: Session = Depends(get_db)):  # noqa
     path = 'data/' + file.filename
     async with aiofiles.open(path, 'wb') as out_file:
         content = await file.read()  # async read
@@ -47,7 +48,7 @@ async def upload_file(file: UploadFile = File(...), db: Session = Depends(get_db
 
 
 def model_call():
-    return 'Обсудили, решили, сделали.....'
+    return 'Обсудили, решили, сделали...'
 
 
 @app.get('/api/predict/{id}')
@@ -55,6 +56,22 @@ async def get_predict(id: int):
     result = model_call()
     return {'text': result}
 
-# @app.get('/api/word')
-# async def get_word():
-#     pass
+
+@app.get('/api/word')
+async def get_word():
+    return FileResponse('data/word.docx',
+                        media_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                        filename='file.docx',
+                        headers={
+                            "Access-Control-Allow-Origin": "*",
+                        })
+
+
+@app.get('/api/pdf')
+async def get_pdf():
+    return FileResponse('data/pdf.pdf',
+                        media_type='application/pdf',
+                        filename='file.docx',
+                        headers={
+                            "Access-Control-Allow-Origin": "*",
+                        })

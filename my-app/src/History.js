@@ -6,6 +6,7 @@ import { Dropdown } from "react-dropdown-now";
 import "react-dropdown-now/style.css";
 import Arrow1 from "./Arrow1.svg";
 import "react-dropdown/style.css";
+import { saveAs } from "file-saver";
 
 const headers = {
   "Access-Control-Allow-Origin": "*",
@@ -34,6 +35,34 @@ class ListItem extends Component {
 }
 
 class ExportComponent extends Component {
+  state = {
+    format: { label: "Word", value: "Word" },
+  };
+
+  download = (e) => {
+    if (this.state.format.label === "Word") {
+      axios
+        .get("api/word", {
+          responseType: "blob",
+          headers: {"Access-Control-Allow-Origin": "*"}
+        })
+        .then((response) => {
+            console.log(response)
+          saveAs(response.data, "Отчет.docx");
+        });
+    } else {
+        axios
+        .get("api/pdf", {
+          responseType: "blob",
+          headers: {"Access-Control-Allow-Origin": "*"}
+        })
+        .then((response) => {
+            console.log(response)
+          saveAs(response.data, "Отчет.pdf");
+        });
+    }
+    
+  };
   render() {
     return (
       <div className="buttons">
@@ -41,10 +70,20 @@ class ExportComponent extends Component {
           <AwesomeButton className="submit-buttons">Применить</AwesomeButton>
         </div>
         <div class="submit-buttons">
-          <AwesomeButton className="submit-buttons">Скачать</AwesomeButton>
+          <AwesomeButton className="submit-buttons" onPress={this.download}>
+            Скачать
+          </AwesomeButton>
         </div>
         <div class="submit-buttons">
-          <Dropdown options={["PDF", "Word"]} value={"Word"} />
+          <Dropdown
+            options={["PDF", "Word"]}
+            value={this.state.format}
+            onChange={(value) =>
+              this.setState({
+                format: { label: value.label, value: value.value },
+              })
+            }
+          />
         </div>
       </div>
     );
@@ -134,7 +173,7 @@ class History extends Component {
                 className="protocol-text"
                 value={this.state.text}
               ></textarea>
-              <ExportComponent/>
+              <ExportComponent />
             </Collapsible>
           </div>
           <hr />
